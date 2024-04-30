@@ -239,6 +239,52 @@ function Write4BytesValues(values, startAddress)
     end
 end
 
+
+function Write4bytesWithLog(values, startAddress)
+    local address = startAddress
+
+    --for i, value in ipairs(values) do
+    --    emu:write32(address, value)
+    --    address = address + 4
+    --end
+
+	for i = 0, #values - 1 do
+		console:log("Wrote to: ".. address  .. " with value: " .. values[i + 1] .. "\n")
+        emu:write32(address, values[i + 1]) -- Lua tables are 1-indexed
+        address = address + 4
+    end
+end
+
+
+function Write4Bytes(startAddress, value)
+    local address = startAddress
+    console:log("Write4Bytes Wrote to: ".. startAddress  .. " with value: " .. value .. "\n")
+    emu:write32(address, value) -- Lua tables are 1-indexed
+end
+
+function WriteTuples(tuples, startAdress)
+	local address = startAdress
+	for _, tuple in ipairs(tuples) do
+	    local increment = tuple[1] -- Get the value to add
+	    local value = tuple[2] -- Get the value
+	    -- Add the increment to the memory address
+	    address = address + increment
+	    emu:write32(address, emu:read32(address))
+	end
+end
+
+function WriteTuplesWithLog(tuples, startAdress)
+	local address = startAdress
+	for _, tuple in ipairs(tuples) do
+	    local increment = tuple[1] -- Get the value to add
+	    local value = tuple[2] -- Get the value
+	    -- Add the increment to the memory address
+	    address = address + increment
+	    console:log("Wrote to: ".. address  .. " with value: " .. value .. "\n")
+	    emu:write32(address, emu:read32(address))
+	end
+end
+
 --To fit everything in 1 file, I must unfortunately clog this file with a lot of sprite data. Luckily, this does not lag the game. It is just hard to read.
 --Also, if you are looking at this, then I am sorry. Truly      -TheHunterManX
 --IsBiking is temporary and is used for drawing the extra symbol
@@ -286,289 +332,304 @@ function createChars(StartAddressNo, SpriteID, SpriteNo, IsBiking)
 			--End of block
 		elseif SpriteID == 4 then
 			--Side Left Walk Cycle 1
-			ConsoleForText:print("got Male Sprite with number:" .. SpriteID)
-			SpriteTempVar0 = ActualAddress 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 2290614272
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149692928
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149645824
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 20 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 34952
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 576443
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 572347
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149633664
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149699231
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3435965599
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3435973279
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3435834096
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 2290639872
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 871576576
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 843202560
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 9223099
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 9227195
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 9227468
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16305356
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16025804
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16008328
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1000228
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 62243
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 859045888
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1682898944
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1713565696
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1714679808
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 4283367424
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 4293918720
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 8 
-			SpriteTempVar1 = 1041475
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16637512
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16047814
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16664783
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1042039
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1009263
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 65520
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
+			console:log("got called by 4")
+			local tuples = {
+			    {0, 0},
+			    {4, 2290614272},
+			    {4, 3149692928},
+			    {4, 3149645824},
+			    {20, 0},
+			    {4, 34952},
+			    {4, 576443},
+			    {4, 572347},
+			    {4, 3149633664},
+			    {4, 3149699231},
+			    {4, 3435965599},
+			    {4, 3435973279},
+			    {4, 3435834096},
+			    {4, 2290639872},
+			    {4, 871576576},
+			    {4, 843202560},
+			    {4, 9223099},
+			    {4, 9227195},
+			    {4, 9227468},
+			    {4, 16305356},
+			    {4, 16025804},
+			    {4, 16008328},
+			    {4, 1000228},
+			    {4, 62243},
+			    {4, 859045888},
+			    {4, 1682898944},
+			    {4, 1713565696},
+			    {4, 1714679808},
+			    {4, 4283367424},
+			    {4, 4293918720},
+			    {4, 0},
+			    {8, 1041475},
+			    {4, 16637512},
+			    {4, 16047814},
+			    {4, 16664783},
+			    {4, 1042039},
+			    {4, 1009263},
+			    {4, 65520},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			}
+			WriteTuples(tuples, ActualAddress)
 			--End of block
 		elseif SpriteID == 5 then
-			--Side Left Walk Cycle 2
-			ConsoleForText:print("got Male Sprite with number:" .. SpriteID)
 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 2290614272
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149692928
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149645824
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 20 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 34952
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 576443
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 572347
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149633664
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3149699231
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3435965599
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3435973279
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 3435834096
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 2290639872
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 871576576
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 843202560
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 9223099
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 9227195
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 9227468
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16305356
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16025804
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16008328
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1000228
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 62243
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 859045888
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 4098359296
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1825046528
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 4244570112
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 2146889728
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 4140822528
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 268369920
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 8 
-			SpriteTempVar1 = 1041475
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16637542
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16007718
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 16663350
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 1000703
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 65535
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4 
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1) 
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
-			SpriteTempVar0 = SpriteTempVar0 + 4
-			SpriteTempVar1 = 0
-			emu:write32(SpriteTempVar0, SpriteTempVar1)
+			--Side Left Walk Cycle 2
+			local tuples = {
+			    {0, 0},
+			    {4, 2290614272},
+			    {4, 3149692928},
+			    {4, 3149645824},
+			    {20, 0},
+			    {4, 34952},
+			    {4, 576443},
+			    {4, 572347},
+			    {4, 3149633664},
+			    {4, 3149699231},
+			    {4, 3435965599},
+			    {4, 3435973279},
+			    {4, 3435834096},
+			    {4, 2290639872},
+			    {4, 871576576},
+			    {4, 843202560},
+			    {4, 9223099},
+			    {4, 9227195},
+			    {4, 9227468},
+			    {4, 16305356},
+			    {4, 16025804},
+			    {4, 16008328},
+			    {4, 1000228},
+			    {4, 62243},
+			    {4, 859045888},
+			    {4, 4098359296},
+			    {4, 1825046528},
+			    {4, 4244570112},
+			    {4, 2146889728},
+			    {4, 4140822528},
+			    {4, 268369920},
+			    {8, 1041475},
+			    {4, 16637542},
+			    {4, 16007718},
+			    {4, 16663350},
+			    {4, 1000703},
+			    {4, 65535},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			}
+			console:log("got called by 5")
+			WriteTuples(tuples, ActualAddress)
 			--End of block
 		elseif SpriteID == 6 then
 			--Side Up Walk Cycle 1
-			local values = { 0,  2290614272,  3149692928,  3149627392,  0,  34952,  576443,  572347,  3149645824,  3149711360,  3435974400,  3435958016,  4240982512,  2290414576,  1095040832,  1157587776,  9223099,  9227195,  16567500,  16305356,  253005007,  255805576,  16729108,  327492,  4282672704,  3438046976,  3712761856,  3723292672,  3739676672,  1315307520,  4152295424,  1008895,  16142028,  255247581,  255053533,  16740077,  65508,  255,  0,  0,  0,  0,  0}
-			Write4BytesValues(values, ActualAddress)
+			local tuples = {
+			    {0, 0},
+			    {4, 2290614272},
+			    {4, 3149692928},
+			    {4, 3149627392},
+			    {20, 0},
+			    {4, 34952},
+			    {4, 576443},
+			    {4, 572347},
+			    {4, 3149645824},
+			    {4, 3149711360},
+			    {4, 3435974400},
+			    {4, 3435958016},
+			    {4, 4240982512},
+			    {4, 2290414576},
+			    {4, 1095040832},
+			    {4, 1157587776},
+			    {4, 9223099},
+			    {4, 9227195},
+			    {4, 16567500},
+			    {4, 16305356},
+			    {4, 253005007},
+			    {4, 255805576},
+			    {4, 16729108},
+			    {4, 327492},
+			    {4, 4282672704},
+			    {4, 3438046976},
+			    {4, 3712761856},
+			    {4, 3723292672},
+			    {4, 3739676672},
+			    {4, 1315307520},
+			    {4, 4152295424},
+			    {8, 1008895},
+			    {4, 16142028},
+			    {4, 255247581},
+			    {4, 255053533},
+			    {4, 16740077},
+			    {4, 65508},
+			    {4, 255},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			}
+
+			WriteTuples(tuples, ActualAddress)
 			--End of block
 		elseif SpriteID == 7 then
 			--Side Up Walk Cycle 2
-			local values = { 0,  2290614272,  3149692928,  3149627392,  0,  34952,  576443,  572347,  3149645824,  3149711360,  3435974400,  3435958016,  4240982512,  2290414576,  1095040768,  1157578752,  9223099,  9227195,  16567500,  16305356,  253005007,  255805576,  83837972,  70713156,  4282839040,  3437522688,  3712771056,  3723244528,  3739680512,  1325334528,  4278190080,  73811199,  16174796,  312541,  1035997,  1011437,  26340,  63359,  4080,  0,  0,  0,  0}
-			Write4BytesValues(values, ActualAddress)
+			local tuples = {
+			    {0, 0},
+			    {4, 2290614272},
+			    {4, 3149692928},
+			    {4, 3149627392},
+			    {20, 0},
+			    {4, 34952},
+			    {4, 576443},
+			    {4, 572347},
+			    {4, 3149645824},
+			    {4, 3149711360},
+			    {4, 3435974400},
+			    {4, 3435958016},
+			    {4, 4240982512},
+			    {4, 2290414576},
+			    {4, 1095040768},
+			    {4, 1157578752},
+			    {4, 9223099},
+			    {4, 9227195},
+			    {4, 16567500},
+			    {4, 16305356},
+			    {4, 253005007},
+			    {4, 255805576},
+			    {4, 83837972},
+			    {4, 70713156},
+			    {4, 4282839040},
+			    {4, 3437522688},
+			    {4, 3712771056},
+			    {4, 3723244528},
+			    {4, 3739680512},
+			    {4, 1325334528},
+			    {4, 4278190080},
+			    {8, 73811199},
+			    {4, 16174796},
+			    {4, 312541},
+			    {4, 1035997},
+			    {4, 1011437},
+			    {4, 26340},
+			    {4, 63359},
+			    {4, 4080},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			}
+
+			WriteTuples(tuples, ActualAddress)
 			--End of block
 		elseif SpriteID == 8 then
 			--Side Down Walk Cycle 1
-			local values = { 0,  2290614272,  3149692928,  3149627392,  0,  34952,  576443,  572347,  3149645824,  3149713152,  2630668032,  3402269168,  2576806896,  1717784320,  790839104,  607340084,  9223099,  16567227,  16567497,  253275308,  255814041,  16004710,  15938290,  275266,  860878388,  4287393776,  2899066880,  2614095872,  4285001728,  1736376320,  4134469632,  1045555,  16149759,  4334794,  4404409,  282623,  255,  0,  0,  0,  0,  0,  0}
-			Write4BytesValues(values, ActualAddress)
+			local tuples = {
+			    {0, 0},
+			    {4, 2290614272},
+			    {4, 3149692928},
+			    {4, 3149627392},
+			    {20, 0},
+			    {4, 34952},
+			    {4, 576443},
+			    {4, 572347},
+			    {4, 3149645824},
+			    {4, 3149713152},
+			    {4, 2630668032},
+			    {4, 3402269168},
+			    {4, 2576806896},
+			    {4, 1717784320},
+			    {4, 790839104},
+			    {4, 607340084},
+			    {4, 9223099},
+			    {4, 16567227},
+			    {4, 16567497},
+			    {4, 253275308},
+			    {4, 255814041},
+			    {4, 16004710},
+			    {4, 15938290},
+			    {4, 275266},
+			    {4, 860878388},
+			    {4, 4287393776},
+			    {4, 2899066880},
+			    {4, 2614095872},
+			    {4, 4285001728},
+			    {4, 1736376320},
+			    {4, 4134469632},
+			    {8, 1045555},
+			    {4, 16149759},
+			    {4, 4334794},
+			    {4, 4404409},
+			    {4, 282623},
+			    {4, 255},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			}
+
+			WriteTuples(tuples, ActualAddress)
 			--End of block
 		elseif SpriteID == 9 then
 			--Side Down Walk Cycle 2
-			local values = { 0,  2290614272,  3149692928,  3149627392,  0,  34952,  576443,  572347,  3149645824,  3149713152,  2630668032,  3402269168,  2576806896,  1717784320,  790839040,  607338496,  9223099,  16567227,  16567497,  253275308,  255814041,  16004710,  83047154,  1130640194,  860876800,  4291194624,  2890015744,  2604872704,  4294197248,  4278190080,  0,  1131410483,  267831551,  314570,  1047737,  1013503,  63350,  63087,  4080,  0,  0,  0,  0}
-			Write4BytesValues(values, ActualAddress)
+			local tuples = {
+			    {0, 0},
+			    {4, 2290614272},
+			    {4, 3149692928},
+			    {4, 3149627392},
+			    {20, 0},
+			    {4, 34952},
+			    {4, 576443},
+			    {4, 572347},
+			    {4, 3149645824},
+			    {4, 3149713152},
+			    {4, 2630668032},
+			    {4, 3402269168},
+			    {4, 2576806896},
+			    {4, 1717784320},
+			    {4, 790839040},
+			    {4, 607338496},
+			    {4, 9223099},
+			    {4, 16567227},
+			    {4, 16567497},
+			    {4, 253275308},
+			    {4, 255814041},
+			    {4, 16004710},
+			    {4, 83047154},
+			    {4, 1130640194},
+			    {4, 860876800},
+			    {4, 4291194624},
+			    {4, 2890015744},
+			    {4, 2604872704},
+			    {4, 4294197248},
+			    {4, 4278190080},
+			    {4, 0},
+			    {8, 1131410483},
+			    {4, 267831551},
+			    {4, 314570},
+			    {4, 1047737},
+			    {4, 1013503},
+			    {4, 63350},
+			    {4, 63087},
+			    {4, 4080},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			    {4, 0},
+			}
+
+			WriteTuples(tuples, ActualAddress)
 			--End of block
 		elseif SpriteID == 10 then
 			--Side Left Bike Facing
